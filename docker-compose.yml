@@ -1,0 +1,15 @@
+version: "3.7"
+
+services:
+  guidom-airflow:
+    image: guidom
+    container_name: guidom-airflow
+    ports:
+      - 8080:8080
+    volumes:
+      - ./src/dags:/app/airflow/dags
+
+networks:
+  default:
+    external:
+      name: guardian-network
