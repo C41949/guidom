@@ -1,6 +1,6 @@
 import ast
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Tuple, List
 
 import requests
@@ -23,7 +23,7 @@ def get_twitter_api_client() -> API:
 
 
 def get_now() -> str:
-    now = datetime.now()
+    now = datetime.now() - timedelta(hours=3)
     current_time = now.strftime("%H:%M:%S")
     return current_time
 
