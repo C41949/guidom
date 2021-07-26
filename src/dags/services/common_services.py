@@ -6,7 +6,8 @@ import requests
 
 
 def get_now() -> str:
-    return datetime.now().strftime("%H:%M:%S")
+    now = datetime.now() - timedelta(3)
+    return now.strftime("%H:%M:%S")
 
 
 def get_image_info(image_url: str) -> Tuple[str, str]:
