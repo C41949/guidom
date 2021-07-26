@@ -17,14 +17,16 @@ RUN pip install -U pip setuptools wheel \
 	&& pip install pyOpenSSL \
     	&& pip install apache-airflow[crypto,aws,slack,postgres]
 
-COPY ./entrypoint.sh /entrypoint.sh
+COPY ./requirements.txt .
+RUN pip install -r requirements.txt
 
 EXPOSE 8080
 
 ENV AIRFLOW_HOME=/app/airflow
 ENV AIRFLOW__CORE__LOAD_EXAMPLES=False
 ENV AIRFLOW__CORE__LOAD_DEFAULT_CONNECTIONS=False
-ENV AIRFLOW__CORE__FERNET_KEY=this-should-be-unique-and-secret
+ENV AIRFLOW__CORE__FERNET_KEY=this-should-be-unique-and-secret-if-in-production
 ENV AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True
 
+COPY ./entrypoint.sh /entrypoint.sh
 ENTRYPOINT [ "/entrypoint.sh" ]

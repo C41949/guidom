@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   guidom-airflow:
-    image: guidom
+    build: ./airflow
     container_name: guidom-airflow
     ports:
       - 8080:8080
