@@ -30,3 +30,7 @@ def send_direct_message(animal_url: str = None, recipient_id: str = None) -> Non
         attachment_type='media',
         attachment_media_id=media.media_id
     )
+
+def tweet(tweet: str) -> None:
+    twitter_client = get_twitter_api_client()
+    twitter_client.update_status(tweet)

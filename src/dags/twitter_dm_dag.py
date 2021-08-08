@@ -31,19 +31,19 @@ send_direct_message_kwargs = ast.literal_eval(Variable.get('twitter_messages_con
 morning_dag_config = {
     'dag_id': 'send-twitter-message-dag-morning',
     'default_args': default_args,
-    'schedule_interval': "0 11 * * *",
+    'schedule_interval': "6 11 * * *",
     'catchup': False,
 }
 afternoon_dag_config = {
     'dag_id': 'send-twitter-message-dag-afternoon',
     'default_args': default_args,
-    'schedule_interval': "0 18 * * *",
+    'schedule_interval': "6 18 * * *",
     'catchup': False,
 }
 night_dag_config = {
     'dag_id': 'send-twitter-message-dag-night',
     'default_args': default_args,
-    'schedule_interval': "0 0 * * *",
+    'schedule_interval': "6 0 * * *",
     'catchup': False,
 }
 

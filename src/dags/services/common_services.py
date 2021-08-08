@@ -16,6 +16,15 @@ def get_image_info(image_url: str) -> Tuple[str, str]:
     return image_url, image_filename
 
 
+def get_emojis(quantity: int = 3) -> str:
+    response = requests.get(f'https://api.emojisworld.io/v1/random?limit={quantity}')
+    if response.ok:
+        data = response.json()
+        emoji_list: list[str] = [emoji.get('emoji') for emoji in data.get('results', [])]
+        return ' '.join(emoji_list)
+        
+    return ' '.join(['☀️' for i in range(quantity)])
+
 def save_image(filename, image_url) -> None:
     with open(filename, 'wb') as handler:
         handler.write(requests.get(image_url, allow_redirects=True).content)
