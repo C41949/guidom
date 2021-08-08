@@ -6,7 +6,7 @@ import requests
 
 
 def get_now() -> str:
-    now = datetime.now() - timedelta(3)
+    now = datetime.now() - timedelta(hours=3)
     return now.strftime("%H:%M:%S")
 
 
