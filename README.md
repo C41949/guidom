@@ -11,7 +11,7 @@
 > The idea is to use this project to study Airflow and related technologies.
 
 ## Documentation :pencil:
-Currently, the project has two main automations:
+Currently, the project has some automations:
 
 - :rocket: [this one](https://github.com/C41949/guidom/blob/main/src/dags/twitter_good_morning_dag.py) that sends good morning messages with emojis on my [personal twitter account](https://twitter.com/kammzinho)
 
