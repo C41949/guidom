@@ -1,12 +1,11 @@
 import ast
 
 from airflow import DAG
-from airflow.models import Variable
 from airflow.operators.dummy import DummyOperator
 from airflow.operators.python import PythonOperator
 
 from services.twitter_services import tweet
-from services.common_services import get_emojis
+from services.common_services import get_emojis_locally
 
 default_args = {'owner': 'airflow', 'depends_on_past': False, 'start_date': '2021-08-06', 'retries': 0}
 
@@ -24,7 +23,7 @@ with DAG(**morning_dag_config) as dag:
     task = PythonOperator(
             task_id='send-tweet-good-morningt-task',
             python_callable=tweet,
-            op_kwargs={'tweet': f'bom dia {get_emojis()}'},
+            op_kwargs={'tweet': f'bom dia {get_emojis_locally()}'},
             dag=dag
         )
     start >> task >> end
