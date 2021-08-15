@@ -13,7 +13,6 @@ def get_now() -> str:
     now = datetime.now() - timedelta(hours=3)
     return now.strftime("%H:%M:%S")
 
-
 def get_image_info(image_url: str) -> Tuple[str, str]:
     image_url = requests.get(image_url).json()[0].get('url')
     image_filename = image_url.split('/')[-1]
@@ -33,6 +32,16 @@ def get_emojis(quantity: int = 3) -> str:
         return ' '.join(emoji_list)
         
     return ' '.join(['☀️' for i in range(quantity)])
+
+def create_temperature() -> None:
+    response = requests.post('http://fever-api:8080/temperature')
+    response.raise_for_status()
+
+    data = response.json()
+    temperature = data['temperature']
+    date = data['date']
+
+    print(f"Temperature at: {date} is {temperature}")
 
 def save_image(filename, image_url) -> None:
     with open(filename, 'wb') as handler:
