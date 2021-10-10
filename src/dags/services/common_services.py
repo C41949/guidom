@@ -14,7 +14,14 @@ def get_now() -> str:
     return now.strftime("%H:%M:%S")
 
 def get_image_info(image_url: str) -> Tuple[str, str]:
-    image_url = requests.get(image_url).json()[0].get('url')
+    r = requests.get(image_url).json()
+
+    # Cat api uses a list wrapper
+    if (isinstance(r, list)):
+        image_url = r[0].get('url')
+    #Dog api uses just a dict
+    else:
+    	image_url = r.get('message')
     image_filename = image_url.split('/')[-1]
     return image_url, image_filename
 
@@ -30,7 +37,7 @@ def get_emojis(quantity: int = 3) -> str:
         data = response.json()
         emoji_list: list[str] = [emoji.get('emoji') for emoji in data.get('results', [])]
         return ' '.join(emoji_list)
-        
+
     return ' '.join(['☀️' for i in range(quantity)])
 
 def create_temperature() -> None:
